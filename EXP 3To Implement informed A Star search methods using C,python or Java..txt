@@ -1,0 +1,118 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def astar(start, goal, graph, heuristic):
+    open_list = [start]
+    closed_list = []
+
+    g = {start: 0}
+    f = {start: heuristic[start]}
+    parent = {start: None}
+
+    while open_list:
+        # Node with minimum f(n)
+        current = min(open_list, key=lambda x: f[x])
+
+        if current == goal:
+            path = []
+            while current:
+                path.append(current)
+                current = parent[current]
+
+            path.reverse()
+            print("SUCCESS")
+            print("Path:", " -> ".join(path))
+            print("Total Cost:", g[goal])
+            return
+
+        open_list.remove(current)
+        closed_list.append(current)
+
+        for neighbor, cost in graph[current]:
+            if neighbor in closed_list:
+                continue
+
+            temp_g = g[current] + cost
+
+            if neighbor not in open_list or temp_g < g.get(neighbor, float('inf')):
+                parent[neighbor] = current
+                g[neighbor] = temp_g
+                f[neighbor] = g[neighbor] + heuristic[neighbor]
+
+                if neighbor not in open_list:
+                    open_list.append(neighbor)
+
+    print("FAILURE")
+
+
+graph = {
+    'A': [('B', 3), ('C', 1)],
+    'B': [],
+    'C': [('A', 2), ('D', 3), ('E', 7)],
+    'D': [('F', 3), ('C', 2), ('B', 1)],
+    'E': [],
+    'F': [('E', 1), ('D', 3), ('G', 1)],
+    'G': []
+}
+
+# Heuristic values
+heuristic = {
+    'A': 7,
+    'B': 5,
+    'C': 6,
+    'D': 4,
+    'E': 1,
+    'F': 1,
+    'G': 0
+}
+
+astar('A', 'G', graph, heuristic)

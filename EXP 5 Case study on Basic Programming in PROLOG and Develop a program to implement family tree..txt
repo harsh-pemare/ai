@@ -1,0 +1,93 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+family_facts = [
+    ("joe", "jane"),
+    ("harry", "carl"),
+    ("meg", "jane"),
+    ("jane", "anne"),
+    ("carl", "ralph"),
+    ("hazel", "harry")
+]
+
+def get_parents(child):
+    """Rule: Finds all parents of a specific child."""
+    return [p for p, c in family_facts if c == child]
+
+def get_children(parent):
+    """Rule: Finds all children of a specific parent."""
+    return [c for p, c in family_facts if p == parent]
+
+def is_grandparent(grandparent, grandchild):
+    """
+    Rule: grandparent(X, Z) :- parent(X, Y), parent(Y, Z).
+    Checks if X is a grandparent of Z.
+    """
+    middle_generation = get_children(grandparent)
+
+    for parent in middle_generation:
+        if grandchild in get_children(parent):
+            return True
+
+    return False
+
+
+print("--- Family Tree Query Results ---")
+
+print(f"Children of Carl: {get_children('carl')}")
+print(f"Parents of Harry: {get_parents('harry')}")
+
+is_gp = is_grandparent("joe", "anne")
+print(f"Is Joe the grandparent of Anne? {is_gp}")
+
+is_gp_2 = is_grandparent("hazel", "ralph")
+print(f"Is Hazel the grandparent of Ralph? {is_gp_2}")

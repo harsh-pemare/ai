@@ -1,0 +1,141 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. Autonomous Taxi: PEAS
+Agent: Self-driving taxi
+Performance measure:
+Safe and timely arrival, minimal fuel consumption, passenger comfort, obey traffic rules
+Environment:
+Roads, traffic signals, pedestrians, other vehicles, weather conditions
+Actuators:
+Steering wheel, accelerator, brake, horn, indicator lights
+Sensors:
+Cameras, LiDAR, radar, GPS, speed sensors
+Autonomous Taxi:
+Observable: Partially
+Agents: Multi (other vehicles, pedestrians, traffic police)
+Deterministic: Stochastic
+Episodic: Sequential
+Static: Dynamic
+Discrete: Continuous
+
+2. Medical Diagnosis System: PEAS
+Agent: AI-based medical diagnosis assistant
+Performance measure:
+Accuracy of diagnosis, reduced false positives/negatives
+Environment:
+Patients, medical records, lab reports, hospital databases
+Actuators:
+Display diagnosis, treatment suggestions, alerts
+Sensors:
+Patient data input, medical reports, test results
+Medical Diagnosis System:
+Observable: Partially
+Agents: Single
+Deterministic: Stochastic
+Episodic: Sequential
+Static: Dynamic
+Discrete: Discrete
+
+3. Online Shopping Recommendation System: PEAS
+Agent: Product recommendation agent
+Performance measure:
+Increase click-through rate, sales, and user satisfaction
+Environment:
+Online users, product catalog, browsing history
+Actuators:
+Display recommended products, offers, notifications
+Sensors:
+User clicks, search history, purchase data
+Recommendation System:
+Observable: Partially
+Agents: Multi (multiple users)
+Deterministic: Stochastic
+Episodic: Sequential
+Static: Dynamic
+Discrete: Discrete
+
+4. Smart Vacuum Cleaner: PEAS
+Agent: Robotic vacuum cleaner
+Performance measure:
+Cleanliness of area, minimum time and energy consumption
+Environment:
+Rooms, furniture, obstacles, dust
+Actuators:
+Wheels, suction motor, brushes
+Sensors:
+Dust sensors, proximity sensors, bump sensors
+Smart Vacuum Cleaner:
+Observable: Partially
+Agents: Single
+Deterministic: Stochastic
+Episodic: Sequential
+Static: Dynamic
+Discrete: Continuous
+
+5. Stock Trading Agent: PEAS
+Agent: Automated stock trading system
+Performance measure:
+Maximize profit, minimize risk
+Environment:
+Stock market, economic indicators, news
+Actuators:
+Buy, sell, hold orders
+Sensors:
+Stock prices, market trends, financial news
+Stock Trading Agent:
+Observable: Partially
+Agents: Multi (other traders)
+Deterministic: Stochastic
+Episodic: Sequential
+Static: Dynamic
+Discrete: Discrete

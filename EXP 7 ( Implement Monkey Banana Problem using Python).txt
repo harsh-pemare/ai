@@ -1,0 +1,143 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from collections import deque
+
+class State:
+    def __init__(self, monkey_pos, monkey_on_box, box_pos, has_banana):
+        self.monkey_pos = monkey_pos
+        self.monkey_on_box = monkey_on_box
+        self.box_pos = box_pos
+        self.has_banana = has_banana
+
+    def __eq__(self, other):
+        return (self.monkey_pos == other.monkey_pos and
+                self.monkey_on_box == other.monkey_on_box and
+                self.box_pos == other.box_pos and
+                self.has_banana == other.has_banana)
+
+    def __hash__(self):
+        return hash((self.monkey_pos, self.monkey_on_box,
+                     self.box_pos, self.has_banana))
+
+    def __str__(self):
+        return f"Monkey at {self.monkey_pos}, On Box: {self.monkey_on_box}, Box at {self.box_pos}, Has Banana: {self.has_banana}"
+
+
+def get_successors(state):
+    successors = []
+
+    # Grasp banana
+    if state.monkey_on_box and state.box_pos == 'center' and not state.has_banana:
+        successors.append(
+            (State(state.monkey_pos, True, 'center', True), "Grasp banana")
+        )
+
+    # Climb box
+    if state.monkey_pos == state.box_pos and not state.monkey_on_box:
+        successors.append(
+            (State(state.monkey_pos, True, state.box_pos, state.has_banana), "Climb box")
+        )
+
+    # Push box
+    if state.monkey_pos == state.box_pos and not state.monkey_on_box:
+        for new_pos in ['door', 'window', 'center']:
+            if new_pos != state.box_pos:
+                successors.append(
+                    (State(new_pos, False, new_pos, state.has_banana),
+                     f"Push box to {new_pos}")
+                )
+
+    # Walk
+    if not state.monkey_on_box:
+        for new_pos in ['door', 'window', 'center']:
+            if new_pos != state.monkey_pos:
+                successors.append(
+                    (State(new_pos, False, state.box_pos, state.has_banana),
+                     f"Walk to {new_pos}")
+                )
+
+    return successors
+
+
+def solve_monkey_banana():
+    initial_state = State('door', False, 'window', False)
+
+    queue = deque([(initial_state, [])])
+    visited = set([initial_state])
+
+    while queue:
+        current_state, path = queue.popleft()
+
+        # Goal check
+        if current_state.has_banana:
+            return path
+
+        for next_state, action in get_successors(current_state):
+            if next_state not in visited:
+                visited.add(next_state)
+                queue.append((next_state, path + [action]))
+
+    return None
+
+
+if __name__ == "__main__":
+    print("Starting AI Solver for Monkey Banana Problem...")
+
+    solution = solve_monkey_banana()
+
+    if solution:
+        print("\nSolution found! Sequence of actions:")
+        for step, action in enumerate(solution, 1):
+            print(f"Step {step}: {action}")
+    else:
+        print("\nNo solution possible.")

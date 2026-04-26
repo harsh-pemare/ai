@@ -1,0 +1,110 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+N = 8
+board = [["." for _ in range(N)] for _ in range(N)]
+
+def print_board():
+    for row in board:
+        print(" ".join(row))
+    print()
+
+def is_safe(row, col):
+    for i in range(N):
+        if board[row][i] == 'Q' or board[i][col] == 'Q':
+            return False
+
+    # Diagonals
+    for i in range(-N, N):
+        if 0 <= row + i < N and 0 <= col + i < N:
+            if board[row + i][col + i] == 'Q':
+                return False
+
+        if 0 <= row + i < N and 0 <= col - i < N:
+            if board[row + i][col - i] == 'Q':
+                return False
+
+    return True
+
+def computer_move():
+    for r in range(N):
+        for c in range(N):
+            if board[r][c] == "." and is_safe(r, c):
+                board[r][c] = "Q"
+                print("Computer placed queen at:", r, c)
+                return
+    print("Computer has no valid move!")
+
+print("8-Queen Interactive Game")
+print("Enter row and column (0-7)\n")
+
+while True:
+    print_board()
+
+    # User move
+    row = int(input("Your Row: "))
+    col = int(input("Your Column: "))
+
+    if row < 0 or row >= N or col < 0 or col >= N:
+        print("Invalid position!")
+        continue
+
+    if board[row][col] == "." and is_safe(row, col):
+        board[row][col] = "Q"
+    else:
+        print("Invalid move!")
+        continue
+
+    print_board()
+
+    # Computer move
+    computer_move()
